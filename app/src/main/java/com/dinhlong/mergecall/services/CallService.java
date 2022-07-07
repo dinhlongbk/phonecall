@@ -26,12 +26,20 @@ public class CallService extends InCallService {
         String number = CallManager.getInstance().getPhoneNumber(call);
         if (CallManager.getInstance().isConferenceCall(call)) {
             number = Constant.CONFERENCE_CALL;
-            List<Call> list = call.getChildren();
-            for (Call c : list) {
-                Log.w(TAG, "list of getChildren: " + c.getDetails());
-            }
+
         }
+        List<Call> list = call.getChildren();
+        Log.e(TAG, "size of ListGetChildren=" + list.size());
+        for (Call c : list) {
+            Log.w(TAG, "list of getChildren: " + c.getDetails());
+        }
+        list = call.getConferenceableCalls();
+        for (Call c : list) {
+            Log.w(TAG, "list of getConferenceableCalls: " + c.getDetails());
+        }
+        Log.w(TAG, "getParent=" + call.getParent());
         Log.i(TAG, "---onCallAdded: " + number);
+        CallManager.getInstance().addRawCallList(call);
         CallManager.getInstance().addCall(number, call);
         CallManager.getInstance().addCallCallback(new CallCallback(this, number,call));
         if (CallManager.getInstance().getSizeOfCallList() == 1) {
@@ -53,6 +61,7 @@ public class CallService extends InCallService {
             number = "ConferenceCall";
         }
         Log.i(TAG, "---onCallRemoved: " + number);
+        CallManager.getInstance().removeRawCallList(call);
         CallManager.getInstance().removeCallCallback(number);
         CallManager.getInstance().removeCall(number);
     }

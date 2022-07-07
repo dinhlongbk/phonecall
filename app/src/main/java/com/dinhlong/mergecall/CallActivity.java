@@ -98,7 +98,7 @@ public class CallActivity extends AppCompatActivity {
                 if (CallManager.getInstance().isHoldCall(num)) {
                     CallManager.getInstance().unholdCall(num);
                 } else {
-                    CallManager.getInstance().unholdCall(num);
+                    CallManager.getInstance().holdCall(num);
                 }
             }
         });
@@ -124,7 +124,7 @@ public class CallActivity extends AppCompatActivity {
                 if (CallManager.getInstance().isHoldCall(num)) {
                     CallManager.getInstance().unholdCall(num);
                 } else {
-                    CallManager.getInstance().unholdCall(num);
+                    CallManager.getInstance().holdCall(num);
                 }
             }
         });
@@ -150,7 +150,7 @@ public class CallActivity extends AppCompatActivity {
                 if (CallManager.getInstance().isHoldCall(num)) {
                     CallManager.getInstance().unholdCall(num);
                 } else {
-                    CallManager.getInstance().unholdCall(num);
+                    CallManager.getInstance().holdCall(num);
                 }
             }
         });
@@ -168,7 +168,7 @@ public class CallActivity extends AppCompatActivity {
                 if (CallManager.getInstance().isHoldCall(Constant.CONFERENCE_CALL)) {
                     CallManager.getInstance().unholdCall(Constant.CONFERENCE_CALL);
                 } else {
-                    CallManager.getInstance().unholdCall(Constant.CONFERENCE_CALL);
+                    CallManager.getInstance().holdCall(Constant.CONFERENCE_CALL);
                 }
             }
         });
