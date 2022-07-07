@@ -16,7 +16,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             android:inputType="phone"
             android:digits="0123456789+"
-            android:text="0974892833"/>
+            android:text="0936089126"/>
         <Button
             android:id="@+id/addNumber11"
             android:layout_width="wrap_content"
@@ -31,6 +31,13 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/addNumber11"
             android:text="Remove"/>
+        <Button
+            android:id="@+id/holdNumber11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/removeNumber11"
+            android:text="Hold"/>
 
         <EditText
             android:id="@+id/number2"
@@ -57,6 +64,13 @@
             app:layout_constraintStart_toStartOf="@+id/addNumber2"
             app:layout_constraintTop_toBottomOf="@+id/addNumber2"
             android:text="Remove"/>
+        <Button
+            android:id="@+id/holdNumber2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@id/removeNumber2"
+            app:layout_constraintTop_toBottomOf="@+id/removeNumber2"
+            android:text="Hold"/>
 
 
         <EditText
@@ -69,7 +83,6 @@
             android:inputType="phone"
             android:digits="0123456789+"
             android:text="18008198"/>
-<!--        android:text="0389905702"/>-->
 
         <Button
             android:id="@+id/addNumber3"
@@ -85,14 +98,35 @@
             app:layout_constraintStart_toStartOf="@+id/addNumber3"
             app:layout_constraintTop_toBottomOf="@+id/addNumber3"
             android:text="Remove"/>
+        <Button
+            android:id="@+id/holdNumber3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@id/removeNumber3"
+            app:layout_constraintTop_toBottomOf="@+id/removeNumber3"
+            android:text="Hold"/>
 
         <Button
             android:id="@+id/mergeCall"
             android:layout_width="340dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/removeNumber3"
+            app:layout_constraintTop_toBottomOf="@id/holdNumber11"
             android:text="Merge"/>
+        <Button
+            android:id="@+id/holdCall"
+            android:layout_width="340dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mergeCall"
+            android:text="Hold"/>
+        <Button
+            android:id="@+id/endCall"
+            android:layout_width="340dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/holdCall"
+            android:text="End"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

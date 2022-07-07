@@ -7,6 +7,8 @@ import android.telecom.Call;
 
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import com.dinhlong.mergecall.utils.Constant;
+
 public class CallCallback extends Call.Callback{
 
     private static final String TAG = CallCallback.class.getName();
@@ -36,9 +38,9 @@ public class CallCallback extends Call.Callback{
     private void sendCallAction(Call call, int state) {
         LocalBroadcastManager localBroadcastManager = LocalBroadcastManager.getInstance(mContext);
         Bundle bundle = new Bundle();
-        bundle.putString("CALL_ID", mCallId);
-        bundle.putInt("CALL_STATE_CHANGED", state);
-        Intent intent = new Intent("ACTION_CALL");
+        bundle.putString(Constant.CALL_ID, mCallId);
+        bundle.putInt(Constant.CALL_STATE_CHANGED, state);
+        Intent intent = new Intent(Constant.ACTION_CALL);
         intent.putExtras(bundle);
         localBroadcastManager.sendBroadcast(intent);
 

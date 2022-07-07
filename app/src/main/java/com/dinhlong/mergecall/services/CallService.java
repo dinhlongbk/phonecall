@@ -1,9 +1,19 @@
-package com.dinhlong.mergecall;
+package com.dinhlong.mergecall.services;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.os.IBinder;
 import android.telecom.Call;
+import android.telecom.CallAudioState;
 import android.telecom.InCallService;
 import android.util.Log;
+
+import com.dinhlong.mergecall.CallActivity;
+import com.dinhlong.mergecall.CallCallback;
+import com.dinhlong.mergecall.CallManager;
+import com.dinhlong.mergecall.utils.Constant;
+
+import java.util.List;
 
 public class CallService extends InCallService {
     private static final String INTENT_PHONE_NUMBER = "PHONE_NUMBER";
@@ -15,7 +25,11 @@ public class CallService extends InCallService {
         super.onCallAdded(call);
         String number = CallManager.getInstance().getPhoneNumber(call);
         if (CallManager.getInstance().isConferenceCall(call)) {
-            number = "ConferenceCall";
+            number = Constant.CONFERENCE_CALL;
+            List<Call> list = call.getChildren();
+            for (Call c : list) {
+                Log.w(TAG, "list of getChildren: " + c.getDetails());
+            }
         }
         Log.i(TAG, "---onCallAdded: " + number);
         CallManager.getInstance().addCall(number, call);
@@ -41,7 +55,31 @@ public class CallService extends InCallService {
         Log.i(TAG, "---onCallRemoved: " + number);
         CallManager.getInstance().removeCallCallback(number);
         CallManager.getInstance().removeCall(number);
-
     }
+
+    @Override
+    public void onConnectionEvent(Call call, String event, Bundle extras) {
+        super.onConnectionEvent(call, event, extras);
+        Log.w(TAG, "onConnectionEvent");
+    }
+
+    @Override
+    public void onCanAddCallChanged(boolean canAddCall) {
+        super.onCanAddCallChanged(canAddCall);
+        Log.w(TAG, "onCanAddCallChanged: " + canAddCall);
+    }
+
+    @Override
+    public void onCallAudioStateChanged(CallAudioState audioState) {
+        super.onCallAudioStateChanged(audioState);
+        Log.w(TAG, "onCallAudioStateChanged: " + audioState);
+    }
+
+    @Override
+    public void onBringToForeground(boolean showDialpad) {
+        super.onBringToForeground(showDialpad);
+        Log.w(TAG, "onBringToForeground");
+    }
+
 
 }

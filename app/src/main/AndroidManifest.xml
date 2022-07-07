@@ -43,7 +43,7 @@
         </activity>
 
         <service
-            android:name="com.dinhlong.mergecall.CallService"
+            android:name="com.dinhlong.mergecall.services.CallService"
             android:exported="true"
             android:permission="android.permission.BIND_INCALL_SERVICE" >
             <meta-data

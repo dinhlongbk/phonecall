@@ -11,6 +11,8 @@ import android.util.Log;
 
 import androidx.core.app.ActivityCompat;
 
+import com.dinhlong.mergecall.utils.Constant;
+
 import java.util.AbstractMap;
 import java.util.HashMap;
 
@@ -66,6 +68,7 @@ public class CallManager {
         }
     }
 
+
     public void clearCallCallback() {
         callCallbackList.clear();
     }
@@ -107,9 +110,9 @@ public class CallManager {
         Call activeCall = getActiveCall();
         String callId = getPhoneNumber(activeCall);
         if (activeCall != null) {
-            Call conferenceCall = callList.get("ConferenceCall");
+            Call conferenceCall = callList.get(Constant.CONFERENCE_CALL);
             if (conferenceCall != null) {
-                activeCall.conference(callList.get("ConferenceCall"));
+                activeCall.conference(callList.get(Constant.CONFERENCE_CALL));
                 Log.i(TAG, "merge " + callId + " to ConferenceCall");
             } else {
                 for (String id : callList.keySet()) {
@@ -126,13 +129,38 @@ public class CallManager {
 
     public void endCall (String callId) {
         Call call = callList.get(callId);
-        call.disconnect();
+        if (call != null) {
+            call.disconnect();
+        }
     }
+
+    public boolean isHoldCall(String callId) {
+        Call call = callList.get(callId);
+        if (call != null) {
+            return call.getState() == Call.STATE_HOLDING;
+        }
+        return false;
+    }
+
+    public void holdCall(String callId) {
+        Call call = callList.get(callId);
+        if (call != null) {
+            call.hold();
+        }
+    }
+
+    public void unholdCall(String callId) {
+        Call call = callList.get(callId);
+        if (call != null) {
+            call.unhold();
+        }
+    }
+
 
     public String getPhoneNumber(Call call) {
         if (call == null) return null;
         if (isConferenceCall(call)) {
-            return "ConferenceCall";
+            return Constant.CONFERENCE_CALL;
         }
         if (call.getDetails().getGatewayInfo() != null) {
             return call.getDetails().getGatewayInfo()
